@@ -1,0 +1,11 @@
+
+    remove_column :wheelchair_maneuvers, :first_check_brakes_on
+    remove_column :wheelchair_maneuvers, :offer_seatbelt
+    remove_column :wheelchair_maneuvers, :securement
+    remove_column :wheelchair_maneuvers, :ask_if_ready
+    remove_column :wheelchair_maneuvers, :remove_restraints
+    remove_column :wheelchair_maneuvers, :check_brakes_off
+    remove_column :wheelchair_maneuvers, :second_ask_to_touch
+    remove_column :wheelchair_maneuvers, :second_check_brakes_on
+    remove_column :wheelchair_maneuvers, :ask_if_all_set_on_lift
+    remove_column :wheelchair_maneuvers, :second_check_brakes_on
