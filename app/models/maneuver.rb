@@ -7,7 +7,7 @@ class Maneuver < ActiveRecord::Base
   validates :name, :sequence_number, presence: true, uniqueness: true
   validates_presence_of :reverse_points,
     if: Proc.new { |m| m.counts_reverses },
-    message: 'Reverses have to count for something!'
+    message: 'You must indicate points taken off when direction is reversed'
 
   def grouped_obstacles
     obstacles.group_by { |o| [o.point_value, o.obstacle_type] }
