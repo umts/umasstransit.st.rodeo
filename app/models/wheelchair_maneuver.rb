@@ -2,7 +2,7 @@ class WheelchairManeuver < ActiveRecord::Base
   has_paper_trail
 
   belongs_to :participant
-  validates :participant, uniqueness: true
+  validates :participant, presence: true, uniqueness: true
   before_validation :set_score
 
   CHECKS = { 
@@ -22,7 +22,9 @@ class WheelchairManeuver < ActiveRecord::Base
     }
   }
   POINT_VALUES = {
-    # points to remove if participant did NOT do the thing
+    # points to remove if participant did NOT complete the action that
+    # the attribute suggests. For example, if participant did not
+    # ask to touch the wheelchair, remove 10 points.
     first_ask_to_touch: 10,
     first_check_brakes_on: 15,
     offer_seatbelt: 15,
@@ -37,9 +39,9 @@ class WheelchairManeuver < ActiveRecord::Base
 
   def set_score
     score = 200
-    POINT_VALUES.each do |key, value|
-      if self.send(key) == false
-        score -= value
+    POINT_VALUES.each_pair do |attribute, point_value|
+      unless self.send(attribute)
+        score -= point_value
       end
     end
     assign_attributes score: score
